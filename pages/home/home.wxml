@@ -1,0 +1,81 @@
+<!-- 加载态 -->
+<view wx:if="{{pageLoading}}" style="text-align:center;color:#b9b9b9;margin-top:40rpx;">
+  <t-loading theme="circular" size="40rpx" text="加载中..." inherit-color />
+</view>
+
+<view class="home-page">
+
+  <!-- 顶部导航条：菜单 + 定位 + 个人 -->
+  <view class="topbar">
+    <t-icon name="menu" size="44rpx" />
+    <view class="location">
+      <t-icon name="location" size="36rpx" />
+      <text>上海市</text>
+    </view>
+    <image class="avatar" src="/images/u_me.jpg" mode="aspectFill"></image>
+  </view>
+
+  <!-- 轮播大图 -->
+  <view class="swiper-wrap">
+    <t-swiper
+      wx:if="{{imgSrcs.length}}"
+      current="{{current}}"
+      autoplay="{{autoplay}}"
+      duration="{{duration}}"
+      interval="{{interval}}"
+      navigation="{{navigation}}"
+      imageProps="{{swiperImageProps}}"
+      list="{{imgSrcs}}"
+      bind:click="navToActivityDetail"
+    />
+  </view>
+
+  <!-- 搜索框 -->
+  <view class="search" bind:tap="navToSearchPage">
+    <t-search
+      t-class-input="t-search__input"
+      t-class-input-container="t-search__input-container"
+      placeholder="搜索目的地 / 主题 / 时间"
+      leftIcon=""
+      disabled
+    >
+      <t-icon slot="left-icon" name="search" size="40rpx" color="#bbb" />
+    </t-search>
+  </view>
+
+  <!-- 行程卡片列表 -->
+  <view class="trip-list">
+    <view
+      class="trip-card"
+      wx:for="{{tripList}}"
+      wx:key="id"
+      data-id="{{item.id}}"
+      bindtap="onTapTrip"
+    >
+      <image class="trip-avatar" src="{{item.avatar}}" mode="aspectFill" />
+      <view class="trip-main">
+        <view class="tags">
+          <t-tag wx:for="{{item.tags}}" wx:key="*this" theme="primary" variant="light" size="small">
+            {{item}}
+          </t-tag>
+        </view>
+
+        <view class="title">{{item.title}}</view>
+
+        <view class="meta">
+          <text class="city">{{item.city}}</text>
+          <text class="dot">·</text>
+          <text class="date">{{item.date}}</text>
+        </view>
+
+        <view class="stats">
+          <text class="members">{{item.members}}</text>
+          <text class="dot">·</text>
+          <text class="price">{{item.price}}</text>
+        </view>
+
+        <view class="host">by {{item.host}}</view>
+      </view>
+    </view>
+  </view>
+</view>

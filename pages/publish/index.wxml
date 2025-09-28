@@ -1,0 +1,30 @@
+<view class="container">
+  <view class="form-item">
+    <text class="label">目的地</text>
+    <input placeholder="请输入城市/地点" bindinput="onInput" data-key="destination"/>
+  </view>
+
+  <view class="form-item">
+    <text class="label">出发日期</text>
+    <picker mode="date" bindchange="onDateChange">
+      <view class="picker">{{ form.date || '请选择日期' }}</view>
+    </picker>
+  </view>
+
+  <view class="form-item">
+    <text class="label">人数</text>
+    <input type="number" placeholder="请输入人数" bindinput="onInput" data-key="people"/>
+  </view>
+
+  <view class="form-item">
+    <text class="label">预算费用（元）</text>
+    <input type="number" placeholder="请输入预计费用" bindinput="onInput" data-key="budget"/>
+  </view>
+
+  <view class="form-item">
+    <text class="label">备注</text>
+    <textarea placeholder="可填写其他要求或说明" bindinput="onInput" data-key="note"/>
+  </view>
+
+  <button class="submit-btn" type="primary" bindtap="onSubmit">发布</button>
+</view>

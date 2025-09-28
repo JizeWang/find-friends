@@ -1,0 +1,29 @@
+.container {
+  padding: 30rpx;
+}
+
+.form-item {
+  margin-bottom: 30rpx;
+}
+
+.label {
+  display: block;
+  margin-bottom: 10rpx;
+  font-weight: bold;
+}
+
+input, textarea, .picker {
+  width: 100%;
+  padding: 20rpx;
+  border: 1px solid #ddd;
+  border-radius: 10rpx;
+  box-sizing: border-box;
+  background-color: #fff;
+}
+
+.submit-btn {
+  margin-top: 50rpx;
+  background-color: #ff5f15;
+  color: white;
+  font-weight: bold;
+}
