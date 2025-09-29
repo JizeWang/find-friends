@@ -1,0 +1,10 @@
+<view class="container">
+  <view class="title">用户注册</view>
+
+  <form bindsubmit="onRegister" class="form">
+    <input class="input" name="username" placeholder="请输入账号" />
+    <input class="input" name="password" type="password" placeholder="请输入密码" />
+    <input class="input" name="confirmPassword" type="password" placeholder="请确认密码" />
+    <button class="btn-login" formType="submit">注册</button>
+  </form>
+</view>

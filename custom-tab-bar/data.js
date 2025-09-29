@@ -15,7 +15,7 @@ export default [
     url: 'pages/publish/index',
   },
   {
-    icon: 'cart',
+    icon: 'chat-bubble',
     text: '购物车',
     url: 'pages/cart/index',
   },

@@ -81,7 +81,7 @@ const getDefaultData = () => ({
   showMakePhone: false,
   userInfo: {
     avatarUrl: '',
-    nickName: '正在登录...',
+    nickName: '请登录',
     phoneNumber: '',
   },
   menuData,
@@ -101,8 +101,21 @@ Page({
 
   onShow() {
     this.getTabBar().init();
+
+    // 登录状态检查
+    const isLogin = wx.getStorageSync('isLogin');
+    if (!isLogin) {
+      // 没有登录，直接跳到登录页
+      wx.navigateTo({
+        url: '/pages/login/login'
+      });
+      return;
+    }
+
+    // 已登录才拉取数据
     this.init();
   },
+
   onPullDownRefresh() {
     this.init();
   },
@@ -113,11 +126,9 @@ Page({
 
   fetUseriInfoHandle() {
     fetchUserCenter().then(({ userInfo, countsData, orderTagInfos: orderInfo, customerServiceInfo }) => {
-      // eslint-disable-next-line no-unused-expressions
       menuData?.[0].forEach((v) => {
         countsData.forEach((counts) => {
           if (counts.type === v.type) {
-            // eslint-disable-next-line no-param-reassign
             v.tit = counts.num;
           }
         });
@@ -214,7 +225,16 @@ Page({
     });
   },
 
+  // 点击头像 / 昵称
   gotoUserEditPage() {
+    const isLogin = wx.getStorageSync('isLogin');
+    if (!isLogin) {
+      wx.navigateTo({
+        url: '/pages/login/login'
+      });
+      return;
+    }
+
     const { currAuthStep } = this.data;
     if (currAuthStep === 2) {
       wx.navigateTo({ url: '/pages/user/person-info/index' });

@@ -12,24 +12,21 @@ Page({
     },
     showUnbindConfirm: false,
     pickerOptions: [
-      {
-        name: '男',
-        code: '1',
-      },
-      {
-        name: '女',
-        code: '2',
-      },
+      { name: '男', code: '1' },
+      { name: '女', code: '2' },
     ],
     typeVisible: false,
     genderMap: ['', '男', '女'],
   },
+
   onLoad() {
     this.init();
   },
+
   init() {
     this.fetchData();
   },
+
   fetchData() {
     fetchPerson().then((personInfo) => {
       this.setData({
@@ -38,15 +35,14 @@ Page({
       });
     });
   },
+
   onClickCell({ currentTarget }) {
     const { dataset } = currentTarget;
     const { nickName } = this.data.personInfo;
 
     switch (dataset.type) {
       case 'gender':
-        this.setData({
-          typeVisible: true,
-        });
+        this.setData({ typeVisible: true });
         break;
       case 'name':
         wx.navigateTo({
@@ -56,16 +52,15 @@ Page({
       case 'avatarUrl':
         this.toModifyAvatar();
         break;
-      default: {
+      default:
         break;
-      }
     }
   },
+
   onClose() {
-    this.setData({
-      typeVisible: false,
-    });
+    this.setData({ typeVisible: false });
   },
+
   onConfirm(e) {
     const { value } = e.detail;
     this.setData(
@@ -80,9 +75,10 @@ Page({
           message: '设置成功',
           theme: 'success',
         });
-      },
+      }
     );
   },
+
   async toModifyAvatar() {
     try {
       const tempFilePath = await new Promise((resolve, reject) => {
@@ -119,4 +115,11 @@ Page({
       });
     }
   },
+
+  // ⭐ 新增方法：切换账号登录
+  onSwitchAccount() {
+    wx.navigateTo({
+      url: '/pages/login/login'
+    });
+  }
 });

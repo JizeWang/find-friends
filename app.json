@@ -1,5 +1,5 @@
 {
-  "pages": ["pages/home/home", "pages/category/index", "pages/cart/index", "pages/usercenter/index", "pages/publish/index"],
+  "pages": ["pages/home/home", "pages/category/index", "pages/cart/index", "pages/usercenter/index", "pages/publish/index", "pages/login/login", "pages/register/register"],
   "subpackages": [
     {
       "root": "pages/user",

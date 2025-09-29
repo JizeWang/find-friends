@@ -1,30 +1,36 @@
 <view class="container">
-  <view class="form-item">
-    <text class="label">目的地</text>
-    <input placeholder="请输入城市/地点" bindinput="onInput" data-key="destination"/>
-  </view>
+  <!-- 类型 -->
+  <picker mode="selector" range="{{typeOptions}}" bindchange="onTypeChange">
+    <view class="form-item">类型：{{typeOptions[typeIndex] || '请选择类型'}}</view>
+  </picker>
 
-  <view class="form-item">
-    <text class="label">出发日期</text>
-    <picker mode="date" bindchange="onDateChange">
-      <view class="picker">{{ form.date || '请选择日期' }}</view>
+  <!-- 游玩类型（仅同城游玩显示） -->
+  <view wx:if="{{typeOptions[typeIndex] === '同城游玩'}}">
+    <picker mode="selector" range="{{playOptions}}" bindchange="onPlayTypeChange">
+      <view class="form-item">游玩类型：{{playOptions[playIndex] || '请选择游玩类型'}}</view>
     </picker>
   </view>
 
-  <view class="form-item">
-    <text class="label">人数</text>
-    <input type="number" placeholder="请输入人数" bindinput="onInput" data-key="people"/>
+  <!-- 目的地 -->
+  <input class="input" placeholder="请输入目的地" bindinput="onInputDestination" value="{{destination}}" />
+
+  <!-- 城市
+  <picker mode="selector" range="{{cityOptions}}" bindchange="onCityChange">
+    <view class="form-item">城市：{{cityOptions[cityIndex] || '请选择城市'}}</view>
+  </picker> -->
+  <!-- 城市（改成地图选点） -->
+  <view class="form-item" bindtap="onChooseLocation">
+    城市：{{cityName || '请选择城市'}}
   </view>
 
-  <view class="form-item">
-    <text class="label">预算费用（元）</text>
-    <input type="number" placeholder="请输入预计费用" bindinput="onInput" data-key="budget"/>
+  <!-- 找伙伴 -->
+  <input class="input" type="number" placeholder="需要几个伙伴" bindinput="onInputPartnerNum" value="{{partnerNum}}" />
+
+  <!-- 设定金额（仅陪玩服务显示） -->
+  <view wx:if="{{typeOptions[typeIndex] === '陪玩服务'}}">
+    <input class="input" type="number" placeholder="请输入金额（元）" bindinput="onInputAmount" value="{{amount}}" />
   </view>
 
-  <view class="form-item">
-    <text class="label">备注</text>
-    <textarea placeholder="可填写其他要求或说明" bindinput="onInput" data-key="note"/>
-  </view>
-
-  <button class="submit-btn" type="primary" bindtap="onSubmit">发布</button>
+  <!-- 发布按钮 -->
+  <button class="btn-publish" bindtap="onPublish">发布</button>
 </view>
